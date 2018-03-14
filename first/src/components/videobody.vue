@@ -74,6 +74,8 @@
               src:[],
               page:0,
               link:[],
+              total:0,
+
 
           }
         },
@@ -126,7 +128,7 @@
                         url:that.GLOBAL.url+"/v1/ApiHome-video.htm?type="+type+"&currentPage="+currentPage+"&pagesize="+pagesize,
                         success:function(json) {
                             var data = JSON.parse(json);
-                            console.log(data)
+                            // console.log(data)
                             that.type=data.type;
                             that.video=data.video;
                             var num=data.video.length;
@@ -134,7 +136,8 @@
                                 that.src[i]=that.GLOBAL.url+data.video[i].src
                                 that.link.push('/videodetail/'+data.video[i].id)
                             }
-                            that.page=Math.ceil(data.total/data.pagesize)
+                            that.page=Math.ceil(data.total/data.pagesize);
+                            that.total=data.total;
 
                         }
                     })

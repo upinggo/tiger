@@ -8,7 +8,7 @@ import global_ from '@/components/global/global'
 
 Vue.prototype.GLOBAL = global_
 Vue.config.productionTip = false
-
+require('../src/assets/js/jiathis.js');//引用分享(jiathis)js脚本
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

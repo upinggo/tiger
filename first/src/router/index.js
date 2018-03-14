@@ -10,6 +10,7 @@ import notice from '@/components/firstpage/notice'
 import works from '@/components/firstpage/works'
 import albumdetail from '@/components/secondpage/albumdetail'
 import videodetail from '@/components/secondpage/videodetail'
+import articledetail from '@/components/secondpage/articledetail'
 Vue.use(Router)
 
 export default new Router({
@@ -66,6 +67,11 @@ export default new Router({
           path:'/videodetail/:id',
           name:'video_detail',
           component:videodetail
-      }
+      },
+      {
+          path:'/articledetail/:id',
+          name:'article_detail',
+          component:articledetail
+      },
   ]
 })

@@ -237,8 +237,6 @@ $("#myAudio")[0].load();
     .SlideShow{width:100%;position:relative;z-index:10;overflow:hidden;clear:both;    background-color: #000;}
     .SlideShow img{width:100%;}
     .SlideShow .img{position: absolute;z-index:9;}
-
-    .SlideShow .img{position: absolute;z-index:9;}
     .Body .Trible{padding:34px 0 0;}
     .Body .Trible .trible{width:1200px;}
     .Body .Title{height:48px;padding:34px 0 0;}
