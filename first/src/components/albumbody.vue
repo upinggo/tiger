@@ -50,7 +50,7 @@
                 currentPage:1,
                 pagesize:9,
                 id:[],
-                page:1,
+                page:0,
                 total:0
             }
         },

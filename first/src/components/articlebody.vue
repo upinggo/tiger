@@ -66,7 +66,7 @@
                         success:function(json) {
                             var data = JSON.parse(json);
                             var s='/articledetail/'
-                            console.log(data)
+                            // console.log(data)
                             that.article=data.article;
                             var num=data.article.length;
                             for(var i=0;i<num;i++){

@@ -50,10 +50,10 @@
                     </div>
                     <div class="page_right">
                         <!--currentPage-->
-                        <span @click="lastone()" class="firstA">&lt;</span>
+                        <span v-if="page!=0" @click="lastone()" class="firstA">&lt;</span>
                         <span v-for="n in page" @click="change(n)" :class="{active:n==currentPage}">{{n}}</span>
 
-                        <span  @click="nextone()" class="lastA">&gt;</span>        <!--currentPage end-->
+                        <span v-if="page!=0"  @click="nextone()" class="lastA">&gt;</span>        <!--currentPage end-->
                     </div>
                     <div class="clear"></div>
                 </div>

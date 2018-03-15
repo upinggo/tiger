@@ -9,10 +9,10 @@
             <router-link to="/notice">查看</router-link>
         </div>
         <div class="Image">
-            <a href="#" class="click"><img src="../assets/img/index_left.jpg"></a>
-            <a href="#" target="_blank" class="click">
+            <router-link to="/album" class="click"><img src="../assets/img/index_left.jpg"></router-link>
+            <router-link to="/trip" target="_blank" class="click">
                 <img src="../assets/img/index_right.jpg">
-            </a>
+            </router-link>
         </div>
     </div>
 </template>

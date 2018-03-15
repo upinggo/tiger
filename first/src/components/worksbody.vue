@@ -51,10 +51,10 @@
                 </div>
                 <div class="page_right">
                     <!--currentPage-->
-                    <span  @click="lastone()" class="firstA">&lt;</span>
-                    <span v-for="n in page" @click="change(n)" :class="{active:n==currentPage}">{{n}}</span>
+                    <span v-if="total!=0"  @click="lastone()" class="firstA">&lt;</span>
+                    <span v-if="total!=0" v-for="n in page" @click="change(n)" :class="{active:n==currentPage}">{{n}}</span>
 
-                    <span  @click="nextone()" class="lastA">&gt;</span>        <!--currentPage end-->
+                    <span v-if="total!=0" @click="nextone()" class="lastA">&gt;</span>        <!--currentPage end-->
                 </div>
                 <div class="clear"></div>
             </div>
@@ -106,6 +106,7 @@
                 case 2:this.type='variety';this.pagesize=8;break;
                 case 3:this.type='concert';break;
             }
+            this.total=0;
             this.useajax();
 
 
@@ -171,13 +172,11 @@
                             url:that.GLOBAL.url+"/v1/ApiHome-works.htm?type="+type+"&currentPage="+currentPage+"&pagesize="+pagesize,
                             success:function(json) {
                                 var data = JSON.parse(json)
-                                // console.log(data,"ablum+film+variety")
+                                console.log(data,"ablum+film+variety")
                                 that.total=data.total;
                                 that.content=data.data;
                                 that.page=Math.ceil(that.total/that.pagesize);
-                                if(!that.page){
-                                    that.page=1;
-                                }
+
                             }
                         })
                     })

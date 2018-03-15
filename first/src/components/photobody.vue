@@ -34,6 +34,7 @@
                             <div class="innerOverview" style="top:-0px">
                                 <router-link v-for="(v,k) in video" :to="videolink[k]">
                                     <img :src="videosrc[k]">
+
                                 </router-link>
 
                             </div>
@@ -48,8 +49,8 @@
                 <div v-for="(v,k) in photo" class="Photo" :class="{leaveOne:k%2==0}">
                     <div class="row">
                         <div  class="rowImage">
-                            <img :src="photominsrc[k]">
-                            <img class="hide" :src="photosrc[k]">
+                            <img :src="photominsrc[k]" @click="open(photosrc[k])">
+                            <!--<img class="hide" :src="photosrc[k]">-->
                         </div>
                     </div>
                 </div>
@@ -67,6 +68,11 @@
                     <div class="clear"></div>
                 </div>
             </div>
+        </div>
+        <div class="shadle hide" @click="close()" style="display: none;"></div>
+        <div class="photo_overview hide" id="photo_overview" style="visibility: hidden; display: none; left: 524.5px; top: 825px;">
+            <img class="close" @click="close()" src="../assets/img/close.png">
+            <img class="photo" src="">
         </div>
     </div>
 </template>
@@ -103,9 +109,38 @@
         },
         created(){},
         methods:{
+            close(){
+                $(".shadle").hide();
+                this.closeDiv("photo_overview");
+            },
+            open(o){
+                $(".shadle").show();
+                $(".photo_overview .photo").attr("src", o);
+                this.openDiv("photo_overview");
+            },
+            closeDiv(obj) {
+                var d = document.getElementById(obj);
+                d.style.visibility = 'hidden';
+                d.style.display = 'none';
+            },
+            openDiv(obj) {
+                if (!document.getElementById(obj))
+                    return false;
+                var d = document.getElementById(obj);
+                d.style.visibility = 'visible';
+                d.style.display = 'block';
+                var wd = window.top.document.documentElement.clientWidth - d.offsetWidth;
+                var ht = window.top.document.documentElement.offsetHeight - d.offsetHeight;
+                d.style.left = (wd / 2) + 'px';
+                d.style.top = (ht / 2) + 'px';
+                window.onresize = function () {
+                    openDiv(obj);
+                };
+            },
             change(n){
                 this.photominsrc=[];
                 this.photosrc=[];
+                this.photo=[];
                 this.currentPage=n;
                 this.useajax();
             },
@@ -115,6 +150,7 @@
                 else{this.currentPage=this.currentPage-1;
                     this.photominsrc=[];
                     this.photosrc=[];
+                    this.photo=[];
                     this.useajax();
                 }
             },
@@ -125,6 +161,7 @@
                 else{this.currentPage=this.currentPage+1;
                     this.photominsrc=[];
                     this.photosrc=[];
+                    this.photo=[];
                     this.useajax();
                 }
             },
@@ -132,6 +169,7 @@
                 this.videopage=n;
                 this.videolink=[];
                 this.videosrc=[];
+                this.video={};
                 this.videoajax();
             },
             videoajax(videopage,videosize){
@@ -171,7 +209,10 @@
                         url:that.GLOBAL.url+"/v1/ApiHome-photo.htm?currentPage="+currentPage+"&pagesize="+pagesize,
                         success:function(json) {
                             var data = JSON.parse(json)
-                            console.log(data)
+                            // console.log(data);
+                            that.photo=[];
+                            that.photominsrc=[];
+                            that.photosrc=[];
                             that.total=data.total;
                             // that.video=data.video;
                             that.page=Math.ceil(data.total/data.pagesize);
@@ -258,7 +299,7 @@
     .currentPage .page_right .active{color:#fea83d;}
     .Middle .currentPage{width: 790px;}
     /*page end*/
-
+    .shadle{width: 100%; height: 100%; z-index: 500; background: #000; position: fixed; top: 0; opacity: 0.7;}
 
     .hide,.isHide{ display: none; }
 </style>

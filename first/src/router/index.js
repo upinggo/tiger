@@ -11,6 +11,8 @@ import works from '@/components/firstpage/works'
 import albumdetail from '@/components/secondpage/albumdetail'
 import videodetail from '@/components/secondpage/videodetail'
 import articledetail from '@/components/secondpage/articledetail'
+import  trip from '@/components/single/trip'
+import  givemeachance from '@/components/single/givemeachance'
 Vue.use(Router)
 
 export default new Router({
@@ -44,14 +46,24 @@ export default new Router({
           component:video,
           children:[{
               path:'/video/:type',
-              name:'video',
+              name:'videotype',
               component:video,
           }]
       },
       {
           path:'/notice',
           name:'notice',
-          component:notice
+          component:notice,
+          children:[{
+              path:'/notice/:year',
+              name:'noticeyear',
+              component:notice,
+              children:[{
+                  path:'/notice/:year/:month',
+                  name:'noticeyearmonth',
+                  component:notice,
+              }]
+          }]
       },
       {
           path:'/works/:name',
@@ -73,5 +85,15 @@ export default new Router({
           name:'article_detail',
           component:articledetail
       },
+      {
+          path:'/trip',
+          name:'trip',
+          component:trip
+      },
+      {
+          path:'/givemeachance',
+          name:'givemeachance',
+          component:givemeachance
+      }
   ]
 })
