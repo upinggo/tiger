@@ -15,9 +15,11 @@
                 <div v-if="datelist.month" class="month">
                     <router-link v-for="(v,k) in datelist.month" :class="{hover:v.month==month}" :to="'/notice/'+year+'/'+datelist.month[k].month">{{v.month}}月</router-link>
                     <div class="givemeachance">
-                        <a href="/html_holiday/givemeachance.htm" target="_blank" title="领取名额">
+                        <!--<router-link to="/givemeachance" target="_blank" title="领取名额">-->
+                        <a href="../../static/givemeachance.html" target="_blank" title="领取名额">
                             <img src="../assets/img/givemeachance.png">
                         </a>
+                        <!--</router-link>-->
                     </div>
                 </div>
             </div>

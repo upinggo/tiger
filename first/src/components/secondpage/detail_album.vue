@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="rowImage">
                             <router-link :to="id[k]">
-                            <img :src="'http://tiger.lc'+v.src">
+                            <img :src="'http://tigerhuclub.com'+v.src">
                             </router-link>
                         </div>
                         <div class="rowDown">
@@ -201,7 +201,7 @@ $("#myAudio")[0].load();
                         url:that.GLOBAL.url+"/v1/ApiHome-album_music.htm?id="+idnum+"&currentPage="+currentPage+"&pagesize="+pagesize,
                         success:function(json) {
                             var data = JSON.parse(json);
-                            console.log(data)
+                            // console.log(data)
                             that.album=data.album;
                             that.srcs=that.GLOBAL.url+data.music.srcS;
                             that.src=that.GLOBAL.url+data.music.src;
@@ -216,7 +216,7 @@ $("#myAudio")[0].load();
                             for(var i=0;i<count;i++){
                                 that.isshow.push(false);
                                 that.isplay.push(false);
-                                that.mp3src.push(data.music.music[i].src);
+                                that.mp3src.push(that.GLOBAL.url+'/'+data.music.music[i].src);
                             }
                             that.page=Math.ceil(data.total/data.pagesize);
                             var num=data.album.length;

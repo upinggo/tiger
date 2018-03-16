@@ -6,7 +6,9 @@
         <div class="Body">
             <div class="Title">
                 <span class="simple"><l>PROFILE</l> | 简介</span>
-                <span class="simple click" onclick="javascript:window.location.href = '#/works/album';"><l>FILMOGRAPHY</l> | 作品</span>
+                <router-link to="/works/album">
+                <span class="simple click"><l>FILMOGRAPHY</l> | 作品</span>
+                </router-link>
             </div>
             <div class="Overview">
                 <div class="OverviewL">
@@ -33,9 +35,15 @@
             <div class="List">
                 <div class="Menu">
                     <div class="button org"><p>EXPERIENCE</p><p>经&nbsp;&nbsp;&nbsp;&nbsp;历</p></div>
-                    <div class="button" onclick="javascript:window.location.href = '#/works/album';"><p>ALBUM</p><p>专&nbsp;&nbsp;&nbsp;&nbsp;辑</p></div>
-                    <div class="button" onclick="javascript:window.location.href = '#/works/film';"><p>O.S.T.</p><p>影视原声</p></div>
-                    <div class="button" onclick="javascript:window.location.href = '#/works/variety';"><p>VARIETY</p><p>综&nbsp;&nbsp;&nbsp;&nbsp;艺</p></div>
+                    <router-link to="/works/album">
+                    <div class="button"><p>ALBUM</p><p>专&nbsp;&nbsp;&nbsp;&nbsp;辑</p></div>
+                    </router-link>
+                    <router-link to="/works/film">
+                    <div class="button"><p>O.S.T.</p><p>影视原声</p></div>
+                    </router-link>
+                    <router-link to="/works/variety">
+                    <div class="button"><p>VARIETY</p><p>综&nbsp;&nbsp;&nbsp;&nbsp;艺</p></div>
+                    </router-link>
                     <div class="button" onclick="javascript:alert(`comming soon.`);"><p>CONCERT</p><p>演&nbsp;唱&nbsp;会</p></div>
                     <!--<div class="button" onclick="javascript:window.location.href = './home-works-type-concert.htm';"><p>CONCERT</p><p>演&nbsp;唱&nbsp;会</p></div>-->
                 </div>

@@ -10,9 +10,9 @@
         </div>
         <div class="Image">
             <router-link to="/album" class="click"><img src="../assets/img/index_left.jpg"></router-link>
-            <router-link to="/trip" target="_blank" class="click">
+            <a href="../../static/trip.html" target="_blank" class="click">
                 <img src="../assets/img/index_right.jpg">
-            </router-link>
+            </a>
         </div>
     </div>
 </template>

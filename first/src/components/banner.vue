@@ -58,14 +58,14 @@
                 var that=this;
                 $.ajax({
                     type:"get",
-                    url:"http://tiger.lc/v1/ApiHome-slideShow.htm",
+                    url:that.GLOBAL.url+"/v1/ApiHome-slideShow.htm",
                     success:function(json){
                         var data= JSON.parse(json)
                         var num=data.slide_show.length;
                         that.i=num;
                         var address="";
                         for(var i=0;i<num;i++){
-                            address="http://tiger.lc"+data.slide_show[i].original_src
+                            address=that.GLOBAL.url+data.slide_show[i].original_src;
                             that.imglist.push(address)
                         }
                     }

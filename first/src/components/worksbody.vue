@@ -5,27 +5,38 @@
     </div>
     <div class="Body">
         <div class="Title">
-            <span class="simple click" onclick="javascript:window.location.href = '#/awards';"><l>PROFILE</l> | 简介</span>
+            <router-link to="/awards">
+            <span class="simple click"><l>PROFILE</l> | 简介</span>
+            </router-link>
             <span class="simple"><l>FILMOGRAPHY</l> | 作品</span>
         </div>
         <div class="List Line nextLine">
             <div class="Menu secondMenu">
-                <div class="button" :class="{org:isshow[0]}" id="album" @click="gettype('album')"><p>ALBUM</p><p>专&nbsp;&nbsp;&nbsp;&nbsp;辑</p></div>
-                <div class="button" :class="{org:isshow[1]}" id="film" @click="gettype('film')"><p>O.S.T.</p><p>影视原声</p></div>
+                <router-link to="/works/album">
+                <div class="button" :class="{org:isshow[0]}" id="album"><p>ALBUM</p><p>专&nbsp;&nbsp;&nbsp;&nbsp;辑</p></div>
+                </router-link>
+                <router-link to="/works/film">
+                <div class="button" :class="{org:isshow[1]}" id="film"><p>O.S.T.</p><p>影视原声</p></div>
+                </router-link>
             </div>
         </div>
         <div class="List Line nextLine onNextLine">
             <div class="Menu secondMenu">
-                <div class="button" :class="{org:isshow[2]}" id="variety" @click="gettype('variety')"><p>VARIETY</p><p>综&nbsp;&nbsp;&nbsp;&nbsp;艺</p></div>
+                <router-link to="/works/variety">
+                <div class="button" :class="{org:isshow[2]}" id="variety"><p>VARIETY</p><p>综&nbsp;&nbsp;&nbsp;&nbsp;艺</p></div>
+                </router-link>
                 <div class="button " :class="{org:isshow[3]}" id="concert" onclick="javascript:alert(`comming soon.`);"><p>CONCERT</p><p>演&nbsp;唱&nbsp;会</p></div>
             </div>
         </div>
         <div class="List Down">
-            <div v-for="(item,index) in content" v-if="type=='ablum'||type=='film'" class="album albumR" :class="{leaveOne:index%3==0}">
+            <div v-for="(item,index) in content" v-if="type=='album'||type=='film'" class="album albumR" :class="{leaveOne:index%3==0}">
                 <div v-if="currentPage==1&&index==0" class="new"></div>
                 <div class="row">
                     <div class="rowImage">
+                        <img v-if="item.linkId==null" :src="src+item.src">
+                        <router-link v-if="item.linkId!=null" :to="'/album/'+item.linkId">
                         <img :src="src+item.src">
+                        </router-link>
                     </div>
                     <div class="rowDown">
                         <p>{{item.name}}</p>
@@ -84,6 +95,7 @@
             '$route': 'changerouter'
         },
         mounted(){
+            this.page=0;
             var name=this.$route.params.name;
             var i;
             if(name=='album'){
@@ -106,7 +118,7 @@
                 case 2:this.type='variety';this.pagesize=8;break;
                 case 3:this.type='concert';break;
             }
-            this.total=0;
+
             this.useajax();
 
 
@@ -131,9 +143,9 @@
                     this.useajax();
                 }
             },
-                gettype(n){
-                    window.location.href = '#/works/'+n;
-                },
+                // gettype(n){
+                //     window.location.href = '#/works/'+n;
+                // },
             changerouter(){
                 var name=this.$route.params.name;
                 var i;
@@ -152,7 +164,7 @@
                 this.isshow[i]=true;
                 this.currentPage=1;
                 switch (parseInt(i)){
-                    case 0:this.type='ablum';this.pagesize=12;break;
+                    case 0:this.type='album';this.pagesize=12;break;
                     case 1:this.type='film';this.pagesize=9;break;
                     case 2:this.type='variety';this.pagesize=8;break;
                     case 3:this.type='concert';break;
@@ -172,7 +184,7 @@
                             url:that.GLOBAL.url+"/v1/ApiHome-works.htm?type="+type+"&currentPage="+currentPage+"&pagesize="+pagesize,
                             success:function(json) {
                                 var data = JSON.parse(json)
-                                console.log(data,"ablum+film+variety")
+                                console.log(data,"album+film+variety")
                                 that.total=data.total;
                                 that.content=data.data;
                                 that.page=Math.ceil(that.total/that.pagesize);

@@ -54,10 +54,10 @@
                         url:that.GLOBAL.url+"/v1/ApiHome-video_detail.htm?id="+id,
                         success:function(json) {
                             var data = JSON.parse(json);
-                            console.log(data);
-                            var string=data.video.src;
+                            // console.log(data);
+                            var string=that.GLOBAL.url+'/'+data.video.src;
                             that.src=encodeURI(string);
-                            console.log(string)
+                            // console.log(string)
                             that.name=data.video.name;
                             that.minstrel=data.video.minstrel;
                             that.access=data.video.access

@@ -70,6 +70,7 @@
                     var that=this;
                     $.ajax({
                         type:"get",
+                        // async:false,
                         url:that.GLOBAL.url+"/v1/ApiHome-album.htm?currentPage="+currentPage+"&pagesize="+pagesize,
                         success:function(json) {
                             var data = JSON.parse(json);

@@ -1,6 +1,6 @@
 <script type="text/javascript">
    //url
-    const url="http://tiger.lc";
+    const url="http://tigerhuclub.com";
     export default
     {
 

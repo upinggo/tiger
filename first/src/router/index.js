@@ -1,21 +1,34 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/firstpage/index'
-import awards from '@/components/firstpage/awards'
-import photo from '@/components/firstpage/photo'
-import article from '@/components/firstpage/article'
-import video from '@/components/firstpage/video'
-import album from '@/components/firstpage/album'
-import notice from '@/components/firstpage/notice'
-import works from '@/components/firstpage/works'
-import albumdetail from '@/components/secondpage/albumdetail'
-import videodetail from '@/components/secondpage/videodetail'
-import articledetail from '@/components/secondpage/articledetail'
-import  trip from '@/components/single/trip'
-import  givemeachance from '@/components/single/givemeachance'
+//全部采用懒加载的方式（其他模式可以查看app.js中采用的路由挂载模式）
+const awards = resolve=>System.import('@/components/firstpage/awards');//路由懒加载
+const photo = resolve=>System.import('@/components/firstpage/photo');
+const article = resolve=>System.import('@/components/firstpage/article');
+const video = resolve=>System.import('@/components/firstpage/video');
+const album = resolve=>System.import('@/components/firstpage/album');
+const notice = resolve=>System.import('@/components/firstpage/notice');
+const works = resolve=>System.import('@/components/firstpage/works');
+const albumdetail = resolve=>System.import('@/components/secondpage/albumdetail');
+const videodetail = resolve=>System.import('@/components/secondpage/videodetail');
+const articledetail = resolve=>System.import('@/components/secondpage/articledetail');
+// import awards from '@/components/firstpage/awards'
+// import photo from '@/components/firstpage/photo'
+// import article from '@/components/firstpage/article'
+// import video from '@/components/firstpage/video'
+// import album from '@/components/firstpage/album'
+// import notice from '@/components/firstpage/notice'
+// import works from '@/components/firstpage/works'
+// import albumdetail from '@/components/secondpage/albumdetail'
+// import videodetail from '@/components/secondpage/videodetail'
+// import articledetail from '@/components/secondpage/articledetail'
+//单页组件
+// import  trip from '@/components/single/trip'
+// import  givemeachance from '@/components/single/givemeachance'
 Vue.use(Router)
 
 export default new Router({
+    mode:'history',
   routes: [
     {
       path: '/',
@@ -85,15 +98,15 @@ export default new Router({
           name:'article_detail',
           component:articledetail
       },
-      {
-          path:'/trip',
-          name:'trip',
-          component:trip
-      },
-      {
-          path:'/givemeachance',
-          name:'givemeachance',
-          component:givemeachance
-      }
+      // {
+      //     path:'/trip',
+      //     name:'trip',
+      //     component:trip
+      // },
+      // {
+      //     path:'/givemeachance',
+      //     name:'givemeachance',
+      //     component:givemeachance
+      // }
   ]
 })
