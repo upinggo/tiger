@@ -3,9 +3,9 @@
         <div class="Slideshow">
             <transition-group tag="ul" name="image">
                 <li v-for="(img, index) in imglist" v-show="index===mark" :key="index">
-                    <a href="#">
-                        <img :src='img'>
-                    </a>
+                    <router-link to="#">
+                        <img v-lazy='img'>
+                    </router-link>
                 </li>
             </transition-group>
         </div>
@@ -13,7 +13,9 @@
       <span v-for="(item, index) in imglist" :class="{ 'active':index===mark }"
             @click="change(index)" :key="index"></span>
         </div>
-        <img src="../assets/img_banner/banner1.jpg" alt="">
+        <div>
+            <img src="../assets/img_banner/banner1.jpg" alt="">
+        </div>
     </div>
 
 </template>
@@ -60,7 +62,8 @@
                     type:"get",
                     url:that.GLOBAL.url+"/v1/ApiHome-slideShow.htm",
                     success:function(json){
-                        var data= JSON.parse(json)
+                        var data= JSON.parse(json);
+                        that.imglist=[];
                         var num=data.slide_show.length;
                         that.i=num;
                         var address="";
@@ -106,6 +109,7 @@
      }
     li{
         position: absolute;
+        display: block;
     }
      ul,li{
         overflow: hidden;

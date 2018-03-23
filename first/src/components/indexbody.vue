@@ -9,9 +9,9 @@
             <router-link to="/notice">查看</router-link>
         </div>
         <div class="Image">
-            <router-link to="/album" class="click"><img src="../assets/img/index_left.jpg"></router-link>
+            <router-link to="/album" class="click"><img v-lazy="index_left"></router-link>
             <a href="../../static/trip.html" target="_blank" class="click">
-                <img src="../assets/img/index_right.jpg">
+                <img v-lazy="'../../static/img/index_right.jpg'">
             </a>
         </div>
     </div>
@@ -19,7 +19,13 @@
 
 <script>
     export default {
-        name: "indexbody"
+        name: "indexbody",
+        data(){
+            return{
+                index_left:'../../static/img/index_left.jpg',
+
+            }
+        }
     }
 </script>
 

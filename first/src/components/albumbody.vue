@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="rowImage">
                             <router-link :to="id[index]">
-                                <img :src="src+item.src">
+                                <img v-lazy="src+item.src">
                             </router-link>
                         </div>
                         <div class="rowDown">

@@ -10,7 +10,7 @@
             <div class="List Line">
                 <div v-for="(v,k) in article" class="Article ">
                     <router-link :to="link[k]">
-                        <img :src="src[k]">
+                        <img v-lazy="src[k]">
                         <p class="name">{{v.name}}</p>
                         <p class="date">日期：{{v.year}}.{{v.month}}.{{v.day}}</p>
                         <p class="address">地点：{{v.address}}</p>

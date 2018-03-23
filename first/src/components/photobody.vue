@@ -15,7 +15,7 @@
                             <router-link to="/album">MORE &gt;</router-link>
                         </div>
                         <div class="albumOverview">
-                            <img :src="albumsrc">
+                            <img v-lazy="albumsrc">
                             <span class="lineOne">专辑名称：{{album.name}}</span>
                             <span class="lineOne">歌手：{{album.minstrel}}</span>
                             <span class="lineTwo">{{album.style}}</span>
@@ -33,7 +33,7 @@
                         <div class="albumOverview videoOverview">
                             <div class="innerOverview" style="top:-0px">
                                 <router-link v-for="(v,k) in video" :to="videolink[k]">
-                                    <img :src="videosrc[k]">
+                                    <img v-lazy="videosrc[k]">
 
                                 </router-link>
 
@@ -49,7 +49,7 @@
                 <div v-for="(v,k) in photo" class="Photo" :class="{leaveOne:k%2==0}">
                     <div class="row">
                         <div  class="rowImage">
-                            <img :src="photominsrc[k]" @click="open(photosrc[k])">
+                            <img v-lazy="photominsrc[k]" @click="open(photosrc[k])">
                             <!--<img class="hide" :src="photosrc[k]">-->
                         </div>
                     </div>

@@ -34,7 +34,7 @@
 
                         <div class="rowImage">
                             <router-link :to="link[k]">
-                            <img :src="src[k]" alt="#">
+                            <img v-lazy="src[k]" alt="#">
                             <img src="../assets/img/video_start.png" alt="背景" class="bgimg">
                             </router-link>
                         </div>
