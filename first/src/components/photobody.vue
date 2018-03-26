@@ -208,7 +208,8 @@
                         type:"get",
                         url:that.GLOBAL.url+"/v1/ApiHome-photo.htm?currentPage="+currentPage+"&pagesize="+pagesize,
                         success:function(json) {
-                            var data = JSON.parse(json)
+                            var data = JSON.parse(json);
+                            window.document.title=data.title;
                             // console.log(data);
                             that.photo=[];
                             that.photominsrc=[];
@@ -285,7 +286,7 @@
     .Body .List .Right .videoRight .Point .a{border-radius:3px;width:6px;height:6px;margin:0 5px 0 5px;cursor: pointer;}
 
     .photo_overview{z-index:501;position:absolute;border:0px ;background:#fff;border-radius:5px;visibility:hidden;}
-    .photo_overview .close{right: 0; position: absolute;background:none;}
+    .photo_overview .close{right: -55px;top: -55px; position: absolute;background:none;}
     .photo_overview .photo{max-width: 1200px;max-height: 670px;}
     .Body .List .leaveOne{margin-left:0px;position: relative;}
     /*Photo end*/

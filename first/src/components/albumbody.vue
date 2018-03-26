@@ -51,7 +51,7 @@
                 pagesize:9,
                 id:[],
                 page:0,
-                total:0
+                total:0,
             }
         },
 
@@ -82,6 +82,7 @@
                             for(var i=0;i<count;i++){
                                 that.id.push("/album/"+data.album[i].id);
                             }
+                            window.document.title=data.title;
 
 
 

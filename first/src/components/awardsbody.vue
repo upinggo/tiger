@@ -81,7 +81,8 @@
                     type:"get",
                     url:that.GLOBAL.url+"/v1/ApiHome-awards.htm",
                     success:function(json){
-                        var data= JSON.parse(json)
+                        var data= JSON.parse(json);
+                        window.document.title=data.title;
                         var awardslist=data.awards;
                         num=data.awards.length;
                         awardslist.forEach(function (k,v) {

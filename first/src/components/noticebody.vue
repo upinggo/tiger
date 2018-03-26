@@ -127,8 +127,9 @@
                         type:"get",
                         url:that.GLOBAL.url+"/v1/ApiHome-notice.htm?currentPage="+currentPage+"&pagesize="+pagesize+"&year="+year+"&month="+month,
                         success:function(json) {
-                            var data = JSON.parse(json)
-                            console.log(data);
+                            var data = JSON.parse(json);
+                            window.document.title=data.title;
+                            // console.log(data);
                             that.page=Math.ceil(data.total/data.pagesize);
                             that.togglenum=[];
                             that.datelist=data.dateList;

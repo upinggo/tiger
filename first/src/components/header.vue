@@ -16,7 +16,7 @@
             <router-link to="/article" class="">活动</router-link>
             <router-link to="/photo" class="">照片</router-link>
             <router-link to="/notice" class="">行程</router-link>
-            <a href="javascript:alert(`comming soon.`);" class="">分享</a>
+            <router-link to="/share" class="">分享</router-link>
         </div>
         <div v-bind:class="{show:isshow,footShadow:isfoot}" @click="disapper"></div>
         <div class="registWindow regist_window" style="display: none;">

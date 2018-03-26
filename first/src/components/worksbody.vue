@@ -183,8 +183,9 @@
                             type:"get",
                             url:that.GLOBAL.url+"/v1/ApiHome-works.htm?type="+type+"&currentPage="+currentPage+"&pagesize="+pagesize,
                             success:function(json) {
-                                var data = JSON.parse(json)
-                                console.log(data,"album+film+variety")
+                                var data = JSON.parse(json);
+                                window.document.title=data.title;
+                                // console.log(data,"album+film+variety")
                                 that.total=data.total;
                                 that.content=data.data;
                                 that.page=Math.ceil(that.total/that.pagesize);

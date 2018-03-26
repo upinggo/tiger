@@ -65,6 +65,7 @@
                         url:that.GLOBAL.url+"/v1/ApiHome-article.htm?currentPage="+currentPage+"&pagesize="+pagesize,
                         success:function(json) {
                             var data = JSON.parse(json);
+                            window.document.title=data.title;
                             var s='/articledetail/'
                             // console.log(data)
                             that.article=data.article;

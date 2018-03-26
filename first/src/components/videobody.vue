@@ -128,6 +128,7 @@
                         url:that.GLOBAL.url+"/v1/ApiHome-video.htm?type="+type+"&currentPage="+currentPage+"&pagesize="+pagesize,
                         success:function(json) {
                             var data = JSON.parse(json);
+                            window.document.title=data.title;
                             // console.log(data)
                             that.type=data.type;
                             that.video=data.video;

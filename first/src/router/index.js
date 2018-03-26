@@ -22,6 +22,7 @@ import works from '@/components/firstpage/works'
 import albumdetail from '@/components/secondpage/albumdetail'
 import videodetail from '@/components/secondpage/videodetail'
 import articledetail from '@/components/secondpage/articledetail'
+import share from '@/components/firstpage/share'
 //单页组件
 // import  trip from '@/components/single/trip'
 // import  givemeachance from '@/components/single/givemeachance'
@@ -98,6 +99,11 @@ export default new Router({
           path:'/articledetail/:id',
           name:'article_detail',
           component:articledetail
+      },
+      {
+          path:'/share',
+          name:'share',
+          component:share
       },
       // { path: '*', component: NotFoundComponent },
       // {
