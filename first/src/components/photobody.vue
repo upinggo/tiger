@@ -114,6 +114,7 @@
                 this.closeDiv("photo_overview");
             },
             open(o){
+                $(".photo_overview .photo").attr("src",'../../static/img/loading.jpg');
                 $(".shadle").show();
                 $(".photo_overview .photo").attr("src", o);
                 this.openDiv("photo_overview");

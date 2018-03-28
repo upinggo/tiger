@@ -63,6 +63,7 @@
                     url:that.GLOBAL.url+"/v1/ApiHome-slideShow.htm",
                     success:function(json){
                         var data= JSON.parse(json);
+                        // console.log(data)
                         that.imglist=[];
                         var num=data.slide_show.length;
                         that.i=num;
