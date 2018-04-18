@@ -3,6 +3,12 @@ const path = require('path')
 const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
+const px2remLoader = {
+    loader: 'px2rem-loader',
+    options: {
+        remUnit: 120   //设计稿的宽度 除以 10，一般设计稿的宽度都为750px
+    }
+}
 
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
@@ -47,7 +53,8 @@ exports.cssLoaders = function (options) {
     if (options.extract) {
       return ExtractTextPlugin.extract({
         use: loaders,
-        fallback: 'vue-style-loader'
+        fallback: 'vue-style-loader',
+          // publicPath: '../../'
       })
     } else {
       return ['vue-style-loader'].concat(loaders)

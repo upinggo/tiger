@@ -1,10 +1,15 @@
 <template>
+    <div>
+        <div class="loading">
+            <img src="../../static/img/loading.gif" alt="">
+            <p>0%</p>
+        </div>
     <div class="slide" v-on:mouseover="stop()" v-on:mouseout="move()">
         <div class="Slideshow">
             <transition-group tag="ul" name="image">
                 <li v-for="(img, index) in imglist" v-show="index===mark" :key="index">
                     <router-link to="#">
-                        <img v-lazy='img'>
+                        <img @load="showindex(index)" :src='img'>
                     </router-link>
                 </li>
             </transition-group>
@@ -17,6 +22,7 @@
             <img src="../assets/img_banner/banner1.jpg" alt="">
         </div>
     </div>
+    </div>
 
 </template>
 
@@ -28,10 +34,21 @@
                 imglist:[],
                 i:0,
                 mark:0,
-                timer:null
+                timer:null,
+                imgnum:[],
             }
         },
         methods:{
+            showindex(index){this.imgnum.push(index);
+            if(this.imgnum.length==this.imglist.length){
+                $(".loading p").text((this.imgnum.length/this.imglist.length).toFixed(2)*100+"%")
+                $(".loading").fadeOut("slow");
+            }
+            else{
+                $(".loading p").text((this.imgnum.length/this.imglist.length).toFixed(2)*100+"%")
+            }
+
+            },
             stop () {
                 clearInterval(this.timer)
             },
@@ -56,6 +73,8 @@
 
             },
         mounted(){
+            $(".loading img").css("top",window.innerHeight*0.4);
+            $(".loading p").css("top",window.innerHeight*0.4);
             this.$nextTick(()=>{
                 var that=this;
                 $.ajax({
@@ -81,6 +100,28 @@
 </script>
 
 <style scoped>
+    .loading{
+        position: absolute;
+        width:100%;
+        height: 100%;
+        background-color: white;
+        z-index: 10000;
+    }
+    .loading img{
+        display: block;
+        position: relative;
+        width: 200px;
+        margin: 0 auto;
+
+    }
+    .loading p{
+        width: 100%;
+        text-align: center;
+        height: 16px;
+        line-height: 16px;
+        font-size: 16px;
+        position: relative;
+    }
     /*SlideShow*/
     .image-enter-active {
         transform: translateX(0);
@@ -111,6 +152,8 @@
     li{
         position: absolute;
         display: block;
+        /*margin:0 auto;*/
+        /*text-align:center;*/
     }
      ul,li{
         overflow: hidden;

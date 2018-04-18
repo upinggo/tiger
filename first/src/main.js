@@ -9,7 +9,7 @@ import VueLazyload from 'vue-lazyload'  //引入这个懒加载插件
 Vue.use(VueLazyload, {
     preLoad: 1.3,
     // error: '../static/error.png',
-    loading: '../static/img/loading.jpg',
+    loading: '../static/img/blogo.jpg',
     attempt: 1
 })
 
