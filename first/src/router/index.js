@@ -23,6 +23,7 @@ import albumdetail from '@/components/secondpage/albumdetail'
 import videodetail from '@/components/secondpage/videodetail'
 import articledetail from '@/components/secondpage/articledetail'
 import share from '@/components/firstpage/share'
+import page from '@/components/page'
 //单页组件
 // import  trip from '@/components/single/trip'
 // import  givemeachance from '@/components/single/givemeachance'
@@ -49,7 +50,7 @@ export default new Router({
       },{
           path:'/photo',
           name:'photo',
-          component:photo
+          component:photo,page
       },{
           path:'/article',
           name:'article',

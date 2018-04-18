@@ -54,19 +54,19 @@
                         </div>
                     </div>
                 </div>
+                <page :total="total" :page="page" :current-page="currentPage" :pagesize="pagesize" @lastone="lastone" @nextone="nextone" @change="change"></page>
+                <!--<div class="currentPage">-->
+                    <!--<div class="page_left">-->
+                    <!--</div>-->
+                    <!--<div class="page_right">-->
+                        <!--&lt;!&ndash;currentPage&ndash;&gt;-->
+                        <!--<span  @click="lastone()" class="firstA">&lt;</span>-->
+                        <!--<span v-for="n in page" v-if="n<8" @click="change(n)" :class="{active:n==currentPage}">{{n}}</span>-->
 
-                <div class="currentPage">
-                    <div class="page_left">
-                    </div>
-                    <div class="page_right">
-                        <!--currentPage-->
-                        <span  @click="lastone()" class="firstA">&lt;</span>
-                        <span v-for="n in page" @click="change(n)" :class="{active:n==currentPage}">{{n}}</span>
-
-                        <span  @click="nextone()" class="lastA">&gt;</span>        <!--currentPage end-->
-                    </div>
-                    <div class="clear"></div>
-                </div>
+                        <!--<span  @click="nextone()" class="lastA">&gt;</span>        &lt;!&ndash;currentPage end&ndash;&gt;-->
+                    <!--</div>-->
+                    <!--<div class="clear"></div>-->
+                <!--</div>-->
             </div>
         </div>
         <div class="shadle hide" @click="close()" style="display: none;"></div>
@@ -78,8 +78,10 @@
 </template>
 
 <script>
+    import page from '../components/page';
     export default {
         name: "photobody",
+        components: {page},
         data(){
             return{
                 pagesize:4,
@@ -130,13 +132,16 @@
                 var d = document.getElementById(obj);
                 d.style.visibility = 'visible';
                 d.style.display = 'block';
-                var wd = window.top.document.documentElement.clientWidth - d.offsetWidth;
-                var ht = window.top.document.documentElement.offsetHeight - d.offsetHeight;
-                d.style.left = (wd / 2) + 'px';
-                d.style.top = (ht / 2) + 'px';
-                window.onresize = function () {
-                    openDiv(obj);
-                };
+                setTimeout(function () {
+                    var wd = window.top.document.documentElement.clientWidth - d.offsetWidth;
+                    var ht = window.top.document.documentElement.offsetHeight - d.offsetHeight;
+                    d.style.left = (wd / 2) + 'px';
+                    d.style.top = (ht / 2) + 'px';
+                    window.onresize = function () {
+                        openDiv(obj);
+                    };
+                },500)
+
             },
             change(n){
                 this.photominsrc=[];
@@ -292,15 +297,15 @@
     .Body .List .leaveOne{margin-left:0px;position: relative;}
     /*Photo end*/
 
-    /*page*/
-    .currentPage{float: left;height: 50px;width: 1200px;line-height: 50px;font-size: 24px;font-family:PingFangSC-Regular,simhei, sans-serif;}
-    .currentPage .page_right{text-align: center;}
-    .currentPage .page_right .firstA{margin-right:95px;margin-left:0px;}
-    .currentPage .page_right span{margin-left:40px;color:#979797;cursor:pointer;}
-    .currentPage .page_right .lastA{margin-left:135px;}
-    .currentPage .page_right .active{color:#fea83d;}
-    .Middle .currentPage{width: 790px;}
-    /*page end*/
+    /*!*page*!*/
+    /*.currentPage{float: left;height: 50px;width: 1200px;line-height: 50px;font-size: 24px;font-family:PingFangSC-Regular,simhei, sans-serif;}*/
+    /*.currentPage .page_right{text-align: center;}*/
+    /*.currentPage .page_right .firstA{margin-right:95px;margin-left:0px;}*/
+    /*.currentPage .page_right span{margin-left:40px;color:#979797;cursor:pointer;}*/
+    /*.currentPage .page_right .lastA{margin-left:135px;}*/
+    /*.currentPage .page_right .active{color:#fea83d;}*/
+    /*.Middle .currentPage{width: 790px;}*/
+    /*!*page end*!*/
     .shadle{width: 100%; height: 100%; z-index: 500; background: #000; position: fixed; top: 0; opacity: 0.7;}
 
     .hide,.isHide{ display: none; }
