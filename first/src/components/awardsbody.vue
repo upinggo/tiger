@@ -1,7 +1,7 @@
 <template>
     <div>
     <div class="SlideShow slide_show">
-        <img v-lazy="'../assets/img/index_awards.jpg'" class="bg ">
+        <img src="../assets/img/index_awards.jpg" class="bg ">
     </div>
         <div class="Body">
             <div class="Title">
