@@ -129,7 +129,7 @@
                         success:function(json) {
                             var data = JSON.parse(json);
                             window.document.title=data.title;
-                            // console.log(data);
+                            console.log(data);
                             that.page=Math.ceil(data.total/data.pagesize);
                             that.togglenum=[];
                             that.datelist=data.dateList;
