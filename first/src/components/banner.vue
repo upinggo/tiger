@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="loading">
-            <img src="../../static/img/loading.gif" alt="">
+            <img src="../../static/img/loading.jpg" class="loadingimg" alt="">
             <p>0%</p>
         </div>
     <div class="slide" v-on:mouseover="stop()" v-on:mouseout="move()">
@@ -137,7 +137,18 @@
     .image-leave {
         transform: translateX(0);
     }
-
+    .loadingimg{
+animation: route 2s infinite;
+-webkit-animation: route 2s infinite;
+    }
+@keyframes route {
+    from {transform:rotate(0deg); }
+    to {transform:rotate(360deg);}
+}
+@-webkit-keyframes route {
+    from {transform:rotate(0deg); }
+    to {transform:rotate(360deg);}
+}
     .slide{
         width: 100%;
         overflow: hidden;
