@@ -18,9 +18,6 @@
       <span v-for="(item, index) in imglist" :class="{ 'active':index===mark }"
             @click="change(index)" :key="index"></span>
         </div>
-        <div>
-            <img src="../assets/img_banner/banner1.jpg" alt="">
-        </div>
     </div>
     </div>
 
@@ -126,10 +123,14 @@
     .image-enter-active {
         transform: translateX(0);
         transition: all 1s ease;
+
     }
     .image-leave-active {
         transform: translateX(-100%);
         transition: all 1s ease;
+        position: absolute;
+        top: 0;
+
     }
     .image-enter {
         transform: translateX(100%);
@@ -161,7 +162,7 @@ animation: route 2s infinite;
         width: 100%;
      }
     li{
-        position: absolute;
+        position: relative;
         display: block;
         /*margin:0 auto;*/
         /*text-align:center;*/
@@ -169,13 +170,6 @@ animation: route 2s infinite;
      ul,li{
         overflow: hidden;
     }
-
-    /*li,ul {*/
-        /*width: 100%;*/
-        /*position: absolute;*/
-        /*top: 0;*/
-        /*display: block;*/
-    /*}*/
     img {
         width: 100%;
     }
