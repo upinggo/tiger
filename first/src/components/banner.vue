@@ -2,7 +2,8 @@
     <div>
         <div class="loading">
             <img src="../../static/img/loading.jpg" class="loadingimg" alt="">
-            <p>0%</p>
+            <p id="loadtext">TIGER.HU</p>
+            <p id="loadnum">0%</p>
         </div>
     <div class="slide" v-on:mouseover="stop()" v-on:mouseout="move()">
         <div class="Slideshow">
@@ -38,11 +39,11 @@
         methods:{
             showindex(index){this.imgnum.push(index);
             if(this.imgnum.length==this.imglist.length){
-                $(".loading p").text((this.imgnum.length/this.imglist.length).toFixed(2)*100+"%")
+                $("#loadnum").text((this.imgnum.length/this.imglist.length).toFixed(2)*100+"%")
                 $(".loading").fadeOut("slow");
             }
             else{
-                $(".loading p").text((this.imgnum.length/this.imglist.length).toFixed(2)*100+"%")
+                $("#loadnum").text((this.imgnum.length/this.imglist.length).toFixed(2)*100+"%")
             }
 
             },
@@ -141,6 +142,14 @@
     .loadingimg{
 animation: route 2s infinite;
 -webkit-animation: route 2s infinite;
+    }
+    #loadtext{
+        height: 20px;
+        line-height: 20px;
+        font-size: 20px;
+        font-family: "Bebas";
+        letter-spacing: 20px;
+        margin-bottom: 30px;
     }
 @keyframes route {
     from {transform:rotate(0deg); }
