@@ -3,8 +3,8 @@
         <p>TIGER.HU.FANS.CLUB</p>
         <p class="p2"> 用户登录 </p>
         <input class="text phone" type="text" name="phone" value="" placeholder="手机号">
-        <input class="text" type="password" name="password" value="" placeholder="输入密码">
-        <a class="bottom do_login" href="javascript:void(0);">登录</a>
+        <input class="text password" type="password" name="password" value="" placeholder="输入密码">
+        <a class="bottom do_login" @click="login" href="javascript:void(0);">登录</a>
         <p class="underText">没有账号？<a href="javascript:void(0);" @click="regist" class="regist">注册</a></p>
     </div>
 </template>
@@ -14,13 +14,32 @@
         name: "login",
         data () {
             return {
-
+                token:null
             }
         },
 
         methods:{
             regist(){
                 this.$emit('regist');
+            },
+            login(){
+                var that=this;
+                $.ajax({
+                    type:"post",
+                    data:{
+                        phone:$(".phone").val(),
+                        password:$(".password").val(),
+                    },
+                    url:that.GLOBAL.url+"/v1/ApiAccount-login.htm",
+                    success:function(json) {
+                        var data=JSON.parse(json);
+                        that.token=data.token;
+                        if(that.token!=null){
+                            that.$router.push({path:'/index'})
+                        }
+
+                    }
+                })
             }
         }
     }
