@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/firstpage/index'
+
+
 //全部采用懒加载的方式（其他模式可以查看app.js中采用的路由挂载模式）
 // const awards = resolve=>System.import('@/components/firstpage/awards');//路由懒加载
 // const photo = resolve=>System.import('@/components/firstpage/photo');

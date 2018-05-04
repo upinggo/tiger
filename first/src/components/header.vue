@@ -19,87 +19,54 @@
             <router-link to="/share" class="">分享</router-link>
         </div>
         <div v-bind:class="{show:isshow,footShadow:isfoot}" @click="disapper"></div>
-        <div class="registWindow regist_window" style="display: none;">
-            <p>TIGER.HU.FANS.CLUB</p>
-            <p class="p2"> 新用户注册 </p>
-            <select class="text phoneFix" name="phone_fix">
-                <option value="086">中国+86</option>
-            </select><input class="text phone" type="text" name="phone" value="" placeholder="手机号">
-            <input class="text code" type="text" name="code" value="" placeholder="请输入验证码"><a class="getCode get_code " href="javascript:void(0);">获取短信验证码</a>
-            <input class="text" type="password" name="password" value="" placeholder="输入密码">
-            <input class="text" type="password" name="cfn_password" value="" placeholder="再次输入密码">
-            <a class="bottom do_regist" href="javascript:void(0);">注册</a>
-            <p class="underText">已有账号？<a href="javascript:void(0);" @click="login" class="login">登录</a></p>
-        </div>
-        <div class="registWindow loginWindow login_window" style="display: none;">
-            <p>TIGER.HU.FANS.CLUB</p>
-            <p class="p2"> 用户登录 </p>
-            <input class="text phone" type="text" name="phone" value="" placeholder="手机号">
-            <input class="text" type="password" name="password" value="" placeholder="输入密码">
-            <a class="bottom do_login" href="javascript:void(0);">登录</a>
-            <p class="underText">没有账号？<a href="javascript:void(0);" @click="regist" class="regist">注册</a></p>
-        </div>
+        <Login  v-if="logindata" @regist="regist"></Login>
+        <Regist  v-if="registdata" @relogin="relogin"></Regist>
     </div>
 
 </template>
 
 <script>
+    import Regist from '../components/regist';
+    import Login from '../components/login';
+
     export default {
+        components:{Login,Regist},
         name: "bannerhead",
         data () {
             return {
                 isshow:true,
-                isfoot:false
+                isfoot:false,
+                logindata:false,
+                registdata:false
             }
         },
         methods:{
-            regist:function () {
-                $(".login_window").hide();
-              $(".regist_window").css({
-                  "top": ($(window).height() - $(".regist_window").height()) / 2-30,
-                  "left": ($(window).width() - $(".regist_window").width()) / 2-50,
-                  "display":"block"
-              });
-            },
-            login:function () {
-                $(".regist_window").hide();
-                $(".login_window").css({
-                    "top": ($(window).height() - $(".login_window").height()) / 2-30,
-                    "left": ($(window).width() - $(".login_window").width()) / 2-50,
-                    "display":"block"
-                });
-            },
             boxlogin:function () {
+                this.logindata=true;
+                this.registdata=false;
                 this.isshow=!this.isshow;
                 this.isfoot=!this.isfoot;
-                var testContTop=($(window).height() - $(".login_window").height()) / 2;
-                var testContWidth=($(window).width() - $(".login_window").width()) / 2;
-                $(".login_window").css({
-                    "top": testContTop-30,
-                    "left": testContWidth-50,
-                    "display":"block"
-                });
             },
             boxregist:function () {
+                this.registdata=true;
+                this.logindata=false;
                 this.isshow=!this.isshow;
                 this.isfoot=!this.isfoot;
-                var testContTop=($(window).height() - $(".regist_window").height()) / 2;
-                var testContWidth=($(window).width() - $(".regist_window").width()) / 2;
-                $(".regist_window").css({
-                    "top": testContTop-30,
-                    "left": testContWidth-50,
-                    "display":"block"
-                });
+
             },
             disapper:function () {
                 this.isshow=!this.isshow;
                 this.isfoot=!this.isfoot;
-                $(".login_window").css({
-                    "display":"none"
-                })
-                $(".regist_window").css({
-                    "display":"none"
-                })
+                this.logindata=false;
+                this.registdata=false;
+            },
+            relogin:function () {
+                this.logindata=true;
+                this.registdata=false;
+            },
+            regist(){
+                this.logindata=false;
+                this.registdata=true;
             }
         }
     }
@@ -126,19 +93,6 @@
 
 
 
-    .registWindow{position: fixed;top: 0;left: 0;color: #ffc700;display:none ;z-index: 501;background:#fff;width:440px;height:450px;padding:30px 50px 70px;border-radius:15px}
-    .registWindow p:first-child{color:#333;line-height: 45px;font-size: 36px; font-family: Bebas;letter-spacing: 6px;}
-    .registWindow p{color:#999;line-height: 86px;font-size: 14px; text-align: center;letter-spacing: 3px; }
-    .p2:before,.p2:after {content: " ";position: relative;display: inline-block;width: 38%;  height: 1px;vertical-align: middle;  background: #999;}
-    .registWindow .text{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;margin-bottom:20px;height: 35px;width:436px;}
-    .registWindow .phoneFix{height: 41px;width:134px;vertical-align: bottom;line-height: 37px;-webkit-appearance: menulist-button;}
-    .registWindow .phone{width: 300px;}
-    .registWindow .code{width: 300px;border: solid #999 1px;padding:2px 0;border-right: 0;}
-    .registWindow .getCode{border: solid #999 1px;width: 138px;display: inline-block;height: 39px;line-height: 39px;border-left: 0;letter-spacing: 5px;font-size:14px;color:#f99b1d;}
-    .registWindow .bottom{width:440px;height:40px;border-radius:5px;background: #f99b1d;color:#fff;font-size:16px;text-align: center;letter-spacing: 10px;display:inline-block;line-height: 40px;}
-    .registWindow .underText{width:440px;height:40px;text-align:right;}
-    .registWindow .underText a{color:#f99b1d;}
-    .loginWindow{height: 320px;}
-    .loginWindow .phone{width: 436px;}
+
 
 </style>
