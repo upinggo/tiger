@@ -17,7 +17,6 @@
                 token:null
             }
         },
-
         methods:{
             regist(){
                 this.$emit('regist');
@@ -33,9 +32,14 @@
                     url:that.GLOBAL.url+"/v1/ApiAccount-login.htm",
                     success:function(json) {
                         var data=JSON.parse(json);
-                        that.token=data.token;
-                        if(that.token!=null){
-                            that.$router.push({path:'/index'})
+                        if(data.token!=null){
+                            that.GLOBAL.token=data.token;
+                            sessionStorage.setItem("token",that.GLOBAL.token);
+                            //跳转至用户中心
+                            that.$router.push({path:'/accountcenter'});
+                        }
+                        else{
+
                         }
 
                     }

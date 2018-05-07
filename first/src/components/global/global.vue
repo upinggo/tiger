@@ -2,10 +2,12 @@
    //url
     const url="http://tigerhuclub.com";
     var title='太歌';
+    var token=sessionStorage.getItem("token");
     export default
     {
         title,
-        url
+        url,
+        token
 
     }
 </script>

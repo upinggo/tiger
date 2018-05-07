@@ -26,6 +26,7 @@ import videodetail from '@/components/secondpage/videodetail'
 import articledetail from '@/components/secondpage/articledetail'
 import share from '@/components/firstpage/share'
 import page from '@/components/page'
+import accountcenter from '@/components/accountcenter'
 //单页组件
 // import  trip from '@/components/single/trip'
 // import  givemeachance from '@/components/single/givemeachance'
@@ -39,7 +40,11 @@ export default new Router({
       name: 'index',
       component: index
     },
-
+      {
+        path:'/accountcenter',
+        name:'accountcenter',
+        component:accountcenter
+      },
       {
     path:'/awards',
           name:'awards',
