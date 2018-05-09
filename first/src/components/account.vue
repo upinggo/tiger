@@ -4,9 +4,10 @@
             <a href="javascript:void(0);" @click="boxlogin" class="login">登录</a> | <a href="javascript:void(0);" @click="boxregist" class="regist">注册</a>
         </div>
         <div @click="show" v-if="!notoken" class="account">
-            <router-link to="/accountcenter" class="menu">
-                <img src="../../static/img/default_head.jpg">
-                未命名昵称</router-link>
+            <a href="javascript:void(0);" class="menu">
+                <img v-if="photo==null||photo==''" src="../../static/img/default_head.jpg">
+                <img v-else :src="photo" alt="">
+                {{nickname}}</a>
             <div v-if="showDiv" class="menuDiv">
                 <router-link to="/accountcenter">基本信息</router-link>
                 <router-link to="/accountcenter">我的积分</router-link>
@@ -28,15 +29,34 @@
 
         data(){
             return{
+                nickname:'未命名昵称',
                 isshow:true,
                 isfoot:false,
                 logindata:false,
                 registdata:false,
                 notoken:true,
-                showDiv:false
+                showDiv:false,
+                photo:null
             }
         },
         mounted(){
+            this.$nextTick(()=>{
+                var that=this;
+
+                $.ajax({
+                    type:"get",
+                    beforeSend: function(request) {
+                        request.setRequestHeader("token", that.GLOBAL.token);
+                    },
+                    url:that.GLOBAL.url+"/v1/ApiAccount-center.htm",
+                    success:function(json) {
+                        var data = JSON.parse(json);
+                        that.nickname=data.data.nickname;
+
+                    }
+                });
+
+            });
            if(this.GLOBAL.token!=null){
                this.notoken=false;
            }
