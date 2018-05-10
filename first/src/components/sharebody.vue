@@ -102,7 +102,6 @@
             useajax(currentPage,pagesize) {
                 pagesize=this.pagesize
                 currentPage=this.currentPage;
-console.log(this.GLOBAL.url);
                 this.$nextTick(()=>{
                     var that=this;
 

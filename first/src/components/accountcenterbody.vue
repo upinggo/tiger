@@ -7,18 +7,19 @@
         <div class="Body">
             <div class="accountOverview">
                 <div class="headPhoto">
-                    <img src="../../static/img/default_head.jpg">
+                    <img v-if="photo==''" src="../../static/img/default_head.jpg">
+                    <img v-if="photo!=''" :src="photo">
                 </div>
                 <div v-if="nickname==null||nickname==''" class="nickname">未命名昵称</div>
                 <div v-else class="nickname">{{nickname}}</div>
                 <div class="menu">
-                    <router-link class="main" to="">主页</router-link>
-                    <router-link class="center hover" to="/">基本信息</router-link>
-                    <router-link class="collect" to="">收藏</router-link>
-                    <router-link class="point" to="/">积分</router-link>
+                    <router-link class="main" :class="{hover:hover=='index'}" to="">主页</router-link>
+                    <router-link class="center" :class="{hover:hover=='basic'}" to="/accountcenter/basic">基本信息</router-link>
+                    <router-link class="collect" :class="{hover:hover=='save'}" to="">收藏</router-link>
+                    <router-link class="point" :class="{hover:hover=='point'}" to="/accountcenter/point">积分</router-link>
                 </div>
             </div>
-            <div class="accountDetail">
+            <div v-if="hover=='basic'" class="accountDetail">
                 <div class="baseInfo">
                     <div class="title">
                         基本信息
@@ -71,11 +72,40 @@
                         <form id="uploadPhoto" enctype="multipart/form-data">
                             <input type="file" @change="uploadimg"  name="photo" accept="image/png,image/jpg,image/gif,image/JPEG" class="photo_form" value="">( 请上传1mb以内，正方形图片作为头像。)
                         </form>
-                        <div class="overviewPhoto">
-                            <img v-if="photo==''" class="photoValue photo_value" src="../../static/img/no_img.jpg" alt="">
-                            <img v-if="photo!=''" class="photoValue photo_value" :src="photo">
+                        <div class="wrapper" v-if="uploadphoto" >
+                            <vueCropper
+                                    ref="cropper"
+                                    :img="example.img"
+                                    :autoCrop="example.autoCrop"
+                                    :fixedBox="example.fixedBox"
+                                    :fixed="true"
+                            ></vueCropper>
                         </div>
-                        <a class="save_photo" href="javascript:void(0);">保存</a>
+                        <div v-else class="overviewPhoto">
+                            <img v-if="photo==''" class="photoValue photo_value" src="../../static/img/no_img.jpg" alt="">
+                            <img v-if="photo!=''" class="photoValue photo_value" :src="photo" alt="">
+                        </div>
+
+
+
+
+                        <a @click="saveimg" class="save_photo" href="javascript:void(0);">保存</a>
+                    </div>
+                </div>
+            </div>
+            <div v-if="hover=='point'" class="accountDetail">
+                <div class="baseInfo">
+                    <div class="title">
+                        积分规则
+                        <p>分值</p>
+                    </div>
+                    <div class="list thP">
+                        <div class="th">1. 账号注册</div><div class="td">+20分</div>
+                        <div class="th">2. 每天登录</div><div class="td">+5分</div>
+                    </div>
+                    <div class="title titleP">
+                        我的积分
+                        <p>{{point}}分</p>
                     </div>
                 </div>
             </div>
@@ -85,17 +115,30 @@
 </template>
 
 <script>
+    import VueCropper from 'vue-cropper';
     export default {
         name: "accountcenterbody",
-
+        components:{VueCropper},
         mounted(){
             this.useajax(this.GLOBAL.token);
-            if(this.provincenum>0){
-                console.log(this.provincenum)
-            }
+            this.getpoint(this.GLOBAL.token);
+            this.hover=this.$route.params.type;
+        },
+        watch: {
+            // 如果路由有变化，会再次执行该方法
+            '$route': 'changerouter'
         },
         data(){
             return{
+                uploadphoto:false,
+                hover:'basic',
+                example: {
+                    img: '',
+                    autoCrop: true,
+                    // autoCropWidth: 100,
+                    fixedBox: false
+                },
+                point:null,
                 attr:{disabledDate(time) {
                         return time.getTime() > Date.now();
                     },},
@@ -122,8 +165,69 @@
 
         },
         methods:{
+            saveimg(){
+                // var form=new FormData($("#uploadPhoto")[0]);
+                var that=this;
+                this.$refs.cropper.getCropData((data) => {
+                    // do something
+                    $.ajax({
+                        type:"post",
+                        async:false,
+                        data:{photo:data},
+                        beforeSend: function(request) {
+                            request.setRequestHeader("token", that.GLOBAL.token);
+                        },
+                        url:that.GLOBAL.url+"/v1/ApiAccount-uploadPhoto.htm",
+                        success:function(json) {
+                            var data = JSON.parse(json);
+                            that.photo=that.GLOBAL.url+data.path;
+                            that.uploadphoto=false;
+                            that.isshow=true;
+                        }
+                    });
+
+                })
+            },
+            getpoint(token) {
+                this.$nextTick(()=>{
+                    var that=this;
+
+                    $.ajax({
+                        type:"get",
+                        beforeSend: function(request) {
+                            request.setRequestHeader("token", token);
+                        },
+                        url:that.GLOBAL.url+"/v1/ApiAccount-point.htm",
+                        success:function(json) {
+                            var data = JSON.parse(json);
+                            that.point=data.data;
+                        }
+                    });
+
+                });
+            },
+            changerouter(){
+                this.hover=this.$route.params.type;
+
+            },
+            //图片预览路径
+            getObjectURL(file) {
+        var url = null;
+        if(window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if(window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if(window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    },
             uploadimg(){
-                console.log("yes")
+                var fileobj=$("input[type='file']")[0].files[0];
+                this.uploadphoto=true;
+
+                this.example.img=this.getObjectURL(fileobj);
+
             },
             disappear(){
                 this.isshow=false;
@@ -203,12 +307,13 @@
                             that.brithday=data.data.brithday;
                             that.phone=data.data.phone;
                             that.email=data.data.email;
-                            that.photo=data.data.photo;
+                            that.photo=that.GLOBAL.url+data.data.photo;
                             that.sex=data.data.sex;
                             that.province=data.region;
                             that.provincenum=data.data.province;
                             that.citynum=data.data.city;
                             that.districtnum=data.data.district;
+
                             if(that.provincenum>0){
                                 $.ajax({
                                     type:"get",
@@ -244,6 +349,11 @@
 </script>
 
 <style scoped>
+    .wrapper{
+        width: 200px;
+        margin: 20px 0;
+        height: 200px;
+    }
 .warning{
     width: 100%;
     height: 100%;

@@ -9,8 +9,8 @@
                 <img v-else :src="photo" alt="">
                 {{nickname}}</a>
             <div v-if="showDiv" class="menuDiv">
-                <router-link to="/accountcenter">基本信息</router-link>
-                <router-link to="/accountcenter">我的积分</router-link>
+                <router-link to="/accountcenter/basic">基本信息</router-link>
+                <router-link to="/accountcenter/point">我的积分</router-link>
                 <a @click="logout" href="javascript:void(0);">退出</a>
             </div>
         </div>
@@ -39,6 +39,7 @@
                 photo:null
             }
         },
+
         mounted(){
             this.$nextTick(()=>{
                 var that=this;
@@ -52,6 +53,7 @@
                     success:function(json) {
                         var data = JSON.parse(json);
                         that.nickname=data.data.nickname;
+                        that.photo=that.GLOBAL.url+data.data.photo;
 
                     }
                 });

@@ -43,7 +43,12 @@ export default new Router({
       {
         path:'/accountcenter',
         name:'accountcenter',
-        component:accountcenter
+        component:accountcenter,
+          children:[{
+              path:'/accountcenter/:type',
+              name:'accountcentertype',
+              component:accountcenter,
+          }]
       },
       {
     path:'/awards',
