@@ -36,7 +36,7 @@
                             that.GLOBAL.token=data.token;
                             sessionStorage.setItem("token",that.GLOBAL.token);
                             //跳转至用户中心
-                            that.$router.push({path:'/accountcenter'});
+                            that.$router.push({path:'/accountcenter/basic'});
                         }
                         else{
 

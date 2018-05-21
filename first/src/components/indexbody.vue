@@ -2,7 +2,7 @@
     <div class="Body">
         <div class="Title">
             <span class=""><l>PROFILE</l> | 简介</span>
-            <span class=""><l>TRIP</l> | 行程</span>
+            <span class=""><l>SCHEDULE</l> | 行程</span>
         </div>
         <div class="Button">
             <router-link to="/awards">了解更多</router-link>
@@ -10,8 +10,8 @@
         </div>
         <div class="Image">
             <router-link to="/album" class="click"><img v-lazy="index_left"></router-link>
-            <a href="../../static/trip.html" target="_blank" class="click">
-                <img v-lazy="'../../static/img/index_right.jpg'">
+            <a href="http://v.qq.com/x/star/111589" target="_blank" class="click">
+                <img v-lazy="'../../static/img/index_right.jpeg'">
             </a>
         </div>
     </div>
@@ -22,7 +22,7 @@
         name: "indexbody",
         data(){
             return{
-                index_left:'../../static/img/index_left.jpg',
+                index_left:'../../static/img/index_left.jpeg',
 
             }
         }

@@ -30,7 +30,7 @@
         </div>
         <div class="List Down">
             <div v-for="(item,index) in content" v-if="type=='album'||type=='film'" class="album albumR" :class="{leaveOne:index%3==0}">
-                <div v-if="currentPage==1&&index==0" class="new"></div>
+                <div v-if="currentPage==1&&index==0&&type=='album'" class="new"></div>
                 <div class="row">
                     <div class="rowImage">
                         <img v-if="item.linkId==null" :src="src+item.src">
@@ -46,7 +46,7 @@
             </div>
 
             <div v-if="type=='variety'" v-for="(item,index) in content" class="video" :class="{leaveOne:index%2==0}">
-                <div v-if="currentPage==1&&index==0" class="new"></div>
+                <!--<div v-if="currentPage==1&&index==0" class="new"></div>-->
                 <div class="row">
                     <div class="rowImage">
                         <a target="_blank" :href="item.link"><img :src="src+item.src"></a>

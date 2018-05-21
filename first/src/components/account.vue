@@ -52,8 +52,11 @@
                     url:that.GLOBAL.url+"/v1/ApiAccount-center.htm",
                     success:function(json) {
                         var data = JSON.parse(json);
-                        that.nickname=data.data.nickname;
-                        that.photo=that.GLOBAL.url+data.data.photo;
+                        if(data.success){
+                            that.nickname=data.data.nickname;
+                            that.photo=that.GLOBAL.url+'/'+data.data.photo;
+                        }
+
 
                     }
                 });
@@ -84,6 +87,7 @@
                 })
                 this.GLOBAL.token=null;
                 sessionStorage.clear();
+                this.notoken=true;
                 this.$router.push({path:'/'});
             },
             boxlogin:function () {

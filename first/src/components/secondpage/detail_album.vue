@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="rowImage">
                             <router-link :to="id[k]">
-                            <img :src="'http://tigerhuclub.com'+v.src">
+                            <img :src="GLOBAL.url+v.src">
                             </router-link>
                         </div>
                         <div class="rowDown">

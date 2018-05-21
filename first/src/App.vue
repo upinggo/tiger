@@ -10,25 +10,45 @@ export default {
   name: 'App',
     mounted(){
         if(this.isWeiXin()){
-            this.$nextTick(()=>{
-                var that=this;
-                $.ajax({
-                    type:"get",
-                    url:that.GLOBAL.url+"/v1/ApiWeChat-getWeChatInfo.htm?backurl="+window.location.pathname,
-                    success:function(json) {
-                        var data = JSON.parse(json);
-                        // window.document.title=data.title;
-                        if(data.success){
+            this.GLOBAL.code=this.GetQueryString('code');
+            if(this.GLOBAL.code!=null){
+                this.$nextTick(()=>{
+                    var that=this;
+                    $.ajax({
+                        type:"get",
+                        url:that.GLOBAL.url+"/v1/ApiWeChat-getWeChatInfo.htm?code="+that.GLOBAL.code+"&backurl="+window.location.pathname.slice(1),
+                        success:function(json) {
+                            var data = JSON.parse(json);
+                            if(data.success){
+                            }else{
+                                var s=data.data.slice(9)
+                                window.location.href=s;
+                            }
 
-                        }else{
-                            var s=data.data.slice(9)
-                            window.location.href=s;
                         }
-                        console.log(data,"isWeiXin")
-
-                    }
+                    })
                 })
-            })
+            }else{
+                this.$nextTick(()=>{
+                    var that=this;
+                    $.ajax({
+                        type:"get",
+                        url:that.GLOBAL.url+"/v1/ApiWeChat-getWeChatInfo.htm?backurl="+window.location.pathname.slice(1),
+                        success:function(json) {
+                            var data = JSON.parse(json);
+                            // window.document.title=data.title;
+
+                            if(data.success){
+                            }else{
+                                var s=data.data.slice(9)
+                                window.location.href=s;
+                            }
+
+                        }
+                    })
+                })
+            }
+
         }else{
         }
     },
@@ -36,6 +56,12 @@ export default {
 
     }},
     methods:{
+         GetQueryString(name)
+{
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+},
         //判断是否微信登陆
         isWeiXin() {
     var ua = window.navigator.userAgent.toLowerCase();

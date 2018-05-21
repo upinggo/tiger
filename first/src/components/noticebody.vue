@@ -5,7 +5,7 @@
         </div>
         <div class="Body">
             <div class="Title Trible">
-                <span class="simple trible"><l>TRIP</l> | 行程</span>
+                <span class="simple trible"><l>SCHEDULE </l> | 行程</span>
             </div>
             <div class="subMenu  Line">
                 <div v-if="datelist.year" class="year">
