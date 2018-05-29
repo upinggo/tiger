@@ -86,6 +86,7 @@ export default new Router({
               path:'/notice/:year',
               name:'noticeyear',
               component:notice,
+
               children:[{
                   path:'/notice/:year/:month',
                   name:'noticeyearmonth',

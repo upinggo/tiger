@@ -72,13 +72,25 @@
         },
         mounted(){
             //刷新页面后重新定位当前年份与日期
-            this.$router.replace({
-                path: '/notice',
-            })
+            if(!this.isWeiXin()){
+                this.$router.replace({
+                    path: '/notice',
+                });
+            }
+
             // console.log(this.$route)
             this.useajax();
         },
         methods:{
+            //判断是否微信登陆
+            isWeiXin() {
+                var ua = window.navigator.userAgent.toLowerCase();
+                if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
             change(n){
                 this.currentPage=n;
                 this.useajax();

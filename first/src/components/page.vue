@@ -1,7 +1,6 @@
 <template>
     <div class="currentPage">
-        <div class="page_left">
-        </div>
+
         <div class="page_right">
             <!--currentPage-->
             <span  @click="lastone()" class="firstA">&lt;</span>
@@ -110,9 +109,9 @@
     /*page*/
     .currentPage{float: left;height: 50px;width: 1200px;line-height: 50px;font-size: 24px;font-family:PingFangSC-Regular,simhei, sans-serif;}
     .currentPage .page_right{text-align: center;}
-    .currentPage .page_right .firstA{margin-right:95px;margin-left:0px;}
+    .currentPage .page_right .firstA{margin-right:0px;margin-left:0px;}
     .currentPage .page_right span{margin-left:40px;color:#979797;cursor:pointer;}
-    .currentPage .page_right .lastA{margin-left:135px;}
+    /*.currentPage .page_right .lastA{margin-left:135px;}*/
     .currentPage .page_right .active{color:#fea83d;}
     .Middle .currentPage{width: 790px;}
     /*page end*/

@@ -9,8 +9,14 @@
 export default {
   name: 'App',
     mounted(){
-        if(this.isWeiXin()){
+
+        if(sessionStorage.getItem("count")==null||sessionStorage.getItem("count")==undefined){
+            sessionStorage.setItem("count","0");
+        }
+        var count=sessionStorage.getItem("count");
+        if(this.isWeiXin()&&count<3){
             this.GLOBAL.code=this.GetQueryString('code');
+            console.log(this.GLOBAL.code)
             if(this.GLOBAL.code!=null){
                 this.$nextTick(()=>{
                     var that=this;
@@ -23,6 +29,8 @@ export default {
                             }else{
                                 var s=data.data.slice(9)
                                 window.location.href=s;
+                                sessionStorage.setItem("count",count+1)
+                                that.GLOBAL.data=data;
                             }
 
                         }
@@ -41,7 +49,9 @@ export default {
                             if(data.success){
                             }else{
                                 var s=data.data.slice(9)
-                                window.location.href=s;
+                                // window.location.href=s;
+                                sessionStorage.setItem("count",count+1)
+                                that.GLOBAL.data=data;
                             }
 
                         }
@@ -50,6 +60,7 @@ export default {
             }
 
         }else{
+            // alert("跳转次数："+this.GLOBAL.count+'返回data:'+this.GLOBAL.data)
         }
     },
     data(){return{
