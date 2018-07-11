@@ -12,7 +12,10 @@
                 <span>|</span>
                 <a href="javascript:void(0);" @click="add_fans">加入Fans团</a>
                 <hr class="clear hr">
-                <p>京ICP备17067685号 | 北京太歌影视音乐有限公司</p>
+                <a href="http://www.miitbeian.gov.cn/">
+                    <p>京ICP备17067685号 | 北京太歌影视音乐有限公司</p>
+                </a>
+
             </div>
         </div>
         <div v-bind:class="{show:isshow,footShadow:isfoot}" @click="disapper"></div>
