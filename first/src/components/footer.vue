@@ -12,10 +12,13 @@
                 <span>|</span>
                 <a href="javascript:void(0);" @click="add_fans">加入Fans团</a>
                 <hr class="clear hr">
-                <a href="http://www.miitbeian.gov.cn/">
-                    <p>京ICP备17067685号 | 北京太歌影视音乐有限公司</p>
-                </a>
-
+                <div  class="beian">
+                <a  href="http://www.miitbeian.gov.cn/">
+                    京ICP备17067685-1号
+                </a> 
+                <span>|</span> <a href="javascript:void(0);">
+                    北京太歌影视音乐有限公司
+                </a></div>
             </div>
         </div>
         <div v-bind:class="{show:isshow,footShadow:isfoot}" @click="disapper"></div>
@@ -123,7 +126,7 @@ this.url='';
         text-decoration: none;
     }
     .Foot .Bar .BarL a,.Foot .Bar .BarL span{color:#656666;margin:0 14px 45px;display:block;float:left;font-family:PingFangSC-Regular,simhei, sans-serif;font-size:17px;height: 28px;line-height: 28px;}
-    .Foot .Bar .BarL a:first-child{background:url('../assets/img/mobile.jpg') no-repeat scroll ;padding-left: 25px}
+    .Foot .Bar .BarL>a:first-child{background:url('../assets/img/mobile.jpg') no-repeat scroll ;padding-left: 25px}
     .Foot .Bar .BarL p{margin:20px 0 0 0 ;text-align: center;}
     .Foot .Bar .BarL p:first-child{margin:45px 0 0 0 ;}
     .Foot .Bar .BarR{float:left;margin:70px 0 0 72px;}
@@ -136,4 +139,12 @@ this.url='';
     .footWindow{position: fixed;top: 0;left: 0;color: #ffc700;display:none ;z-index: 501; }
     .closeFoot{position: absolute;right: -40px;top: -36px;background:none;}
     .bodyFoot{background:none;}
+    .Foot .Bar .BarL div.beian a, .Foot .Bar .BarL div.beian span {
+    float: none;
+    display: inline-block;
+    font-size: 10px;
+}.Foot .Bar .BarL div.beian {
+    display: block;
+    text-align: center;
+}
 </style>
